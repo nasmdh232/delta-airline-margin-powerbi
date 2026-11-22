@@ -1,0 +1,209 @@
+/// Discrete quarterly facts derived from year-to-date XBRL values.
+table v_quarterly
+	lineageTag: b899a09a-0fa7-9be4-e616-1ecaa3503a52
+
+	column airline_id
+		dataType: string
+		lineageTag: 054f5bb7-c77b-d90e-0a7a-6d5c1b63e524
+		summarizeBy: none
+		sourceColumn: airline_id
+
+	column fiscal_year
+		dataType: int64
+		formatString: 0
+		lineageTag: c7949551-4124-f871-3c6f-d890eb3d5849
+		summarizeBy: none
+		sourceColumn: fiscal_year
+
+	column fiscal_quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 5760bee9-d6ff-0210-2e2c-af163695df3d
+		summarizeBy: none
+		sourceColumn: fiscal_quarter
+
+	column label
+		dataType: string
+		lineageTag: ccf18c3a-7121-6e64-9418-622619f1fdd9
+		summarizeBy: none
+		sourceColumn: label
+
+	column period_end
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 1f99176e-5e41-12d6-488b-f6ca0f6ca9e7
+		summarizeBy: none
+		sourceColumn: period_end
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column revenue
+		dataType: double
+		formatString: $#,0
+		lineageTag: 27631aaf-cec4-cd22-f833-ef6cc26bf258
+		summarizeBy: none
+		sourceColumn: revenue
+
+	column fuel_expense
+		dataType: double
+		formatString: $#,0
+		lineageTag: 5057476c-fb32-ef11-d4d2-7664369aa257
+		summarizeBy: none
+		sourceColumn: fuel_expense
+
+	column labor_expense
+		dataType: double
+		formatString: $#,0
+		lineageTag: d4a5272d-6004-c3da-023f-316eab29fe3a
+		summarizeBy: none
+		sourceColumn: labor_expense
+
+	column d_and_a
+		dataType: double
+		formatString: $#,0
+		lineageTag: d8cba0ec-65f1-857d-726c-fd163ca0be00
+		summarizeBy: none
+		sourceColumn: d_and_a
+
+	column operating_income
+		dataType: double
+		formatString: $#,0
+		lineageTag: 95a3999b-f419-4774-c1a5-a6d183b96616
+		summarizeBy: none
+		sourceColumn: operating_income
+
+	column net_income
+		dataType: double
+		formatString: $#,0
+		lineageTag: 580de36b-6e63-4357-a465-ca2b6cd10842
+		summarizeBy: none
+		sourceColumn: net_income
+
+	column interest_expense
+		dataType: double
+		formatString: $#,0
+		lineageTag: 5a05a2d7-3e18-5463-d21a-950c1dde010d
+		summarizeBy: none
+		sourceColumn: interest_expense
+
+	column ebitda
+		dataType: double
+		formatString: $#,0
+		lineageTag: 0691fbe0-7024-7cfa-ad11-a1fe5fdaeb68
+		summarizeBy: none
+		sourceColumn: ebitda
+
+	column operating_margin
+		dataType: double
+		formatString: 0.0%
+		lineageTag: a47debf7-a0c0-76af-f82d-5f957e7a3a47
+		summarizeBy: none
+		sourceColumn: operating_margin
+
+	column net_margin
+		dataType: double
+		formatString: 0.0%
+		lineageTag: f4f026d9-c24c-42c2-b91f-7f371cfc18bf
+		summarizeBy: none
+		sourceColumn: net_margin
+
+	column fuel_pct_rev
+		dataType: double
+		formatString: 0.0%
+		lineageTag: b2e94bd1-7ebb-48ba-bb84-486a754e6f0f
+		summarizeBy: none
+		sourceColumn: fuel_pct_rev
+
+	column labor_pct_rev
+		dataType: double
+		formatString: 0.0%
+		lineageTag: e0728c2f-b642-5931-0309-f64afb024e7f
+		summarizeBy: none
+		sourceColumn: labor_pct_rev
+
+	column cfo
+		dataType: double
+		formatString: $#,0
+		lineageTag: 03133b64-ed75-2a16-1398-2156f3d5b843
+		summarizeBy: none
+		sourceColumn: cfo
+
+	column capex
+		dataType: double
+		formatString: $#,0
+		lineageTag: e2d56d77-6b4d-83e6-0dc0-f2b539f7f61c
+		summarizeBy: none
+		sourceColumn: capex
+
+	column free_cash_flow
+		dataType: double
+		formatString: $#,0
+		lineageTag: 6e4485a1-8473-90a2-22d4-9cc70b1e2ab4
+		summarizeBy: none
+		sourceColumn: free_cash_flow
+
+	column cash
+		dataType: double
+		formatString: $#,0
+		lineageTag: 0f098e23-0bbb-de39-309c-c05725162dc0
+		summarizeBy: none
+		sourceColumn: cash
+
+	column st_investments
+		dataType: double
+		formatString: $#,0
+		lineageTag: 1a6e5c10-04ef-9a7f-53d9-d180c634c6b6
+		summarizeBy: none
+		sourceColumn: st_investments
+
+	column liquidity
+		dataType: double
+		formatString: $#,0
+		lineageTag: 4f736496-d766-df18-7ef0-e63e72e0c1cb
+		summarizeBy: none
+		sourceColumn: liquidity
+
+	column current_assets
+		dataType: double
+		formatString: $#,0
+		lineageTag: 6a72bcdd-08d6-27ba-5488-d3d35206c3b4
+		summarizeBy: none
+		sourceColumn: current_assets
+
+	column current_liabilities
+		dataType: double
+		formatString: $#,0
+		lineageTag: 2c0e6cb5-7622-351c-7d9b-7d91d38f976a
+		summarizeBy: none
+		sourceColumn: current_liabilities
+
+	column equity
+		dataType: double
+		formatString: $#,0
+		lineageTag: 9475aea1-137d-8e25-4605-031e54a9af47
+		summarizeBy: none
+		sourceColumn: equity
+
+	column total_assets
+		dataType: double
+		formatString: $#,0
+		lineageTag: e5c7a173-8ff5-fb9a-3196-591f6a8bbe8f
+		summarizeBy: none
+		sourceColumn: total_assets
+
+	column total_debt
+		dataType: double
+		formatString: $#,0
+		lineageTag: 9b051df0-a571-9b91-55f7-a714fb11d78d
+		summarizeBy: none
+		sourceColumn: total_debt
+
+	partition v_quarterly = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "v_quarterly.csv"), [Delimiter = ",", Columns = 28, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"airline_id", type text}, {"fiscal_year", Int64.Type}, {"fiscal_quarter", Int64.Type}, {"label", type text}, {"period_end", type date}, {"revenue", type number}, {"fuel_expense", type number}, {"labor_expense", type number}, {"d_and_a", type number}, {"operating_income", type number}, {"net_income", type number}, {"interest_expense", type number}, {"ebitda", type number}, {"operating_margin", type number}, {"net_margin", type number}, {"fuel_pct_rev", type number}, {"labor_pct_rev", type number}, {"cfo", type number}, {"capex", type number}, {"free_cash_flow", type number}, {"cash", type number}, {"st_investments", type number}, {"liquidity", type number}, {"current_assets", type number}, {"current_liabilities", type number}, {"equity", type number}, {"total_assets", type number}, {"total_debt", type number}}, "en-US")
+				in
+				    Typed

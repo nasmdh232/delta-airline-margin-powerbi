@@ -1,0 +1,14 @@
+/// Fuel-price shock values (%) for the stress-test chart.
+table 'Fuel Shock'
+	lineageTag: 96473a2d-7438-e3b0-c09d-8c329beff805
+
+	column 'Fuel Shock %'
+		dataType: int64
+		formatString: +0"%";-0"%";0"%"
+		lineageTag: 1b5fc5a3-bb8a-8af1-9906-a275edb671b5
+		summarizeBy: none
+		sourceColumn: [Value]
+
+	partition 'Fuel Shock' = calculated
+		mode: import
+		source = GENERATESERIES(-20, 40, 10)

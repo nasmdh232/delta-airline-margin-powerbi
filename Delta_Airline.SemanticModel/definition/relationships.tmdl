@@ -1,0 +1,35 @@
+relationship d96fae01-9516-3af8-54a9-99b6a1f8858f
+	fromColumn: v_annual.airline_id
+	toColumn: dim_airline.airline_id
+
+relationship 4ffc0cf8-0cfb-20d9-cb31-dbef606a459e
+	fromColumn: v_quarterly.airline_id
+	toColumn: dim_airline.airline_id
+
+relationship 28802b25-a6f6-1068-f3fb-e0cf8e654965
+	fromColumn: v_credit.airline_id
+	toColumn: dim_airline.airline_id
+
+relationship dfcb9eac-bf8f-2961-55cb-a3e485dd1c8d
+	fromColumn: operating_metrics.airline_id
+	toColumn: dim_airline.airline_id
+
+relationship 06892909-869e-7ff5-19c1-4ddb5aa2c897
+	fromColumn: v_annual.fiscal_year
+	toColumn: dim_year.fiscal_year
+
+relationship 1b2029ec-1ed5-47d7-fb44-84fcb799b518
+	fromColumn: operating_metrics.fiscal_year
+	toColumn: dim_year.fiscal_year
+
+relationship bcc9f72b-6b13-0561-0eab-67b6948781cb
+	fromColumn: v_quarterly.period_end
+	toColumn: dim_period.period_end
+
+relationship b19cacbd-3c17-f557-9637-0ad5f4e6588e
+	fromColumn: v_credit.period_end
+	toColumn: dim_period.period_end
+
+relationship 2b6022c1-3410-b96d-4b00-e83c8f4c4be1
+	fromColumn: dim_period.fiscal_year
+	toColumn: dim_year.fiscal_year

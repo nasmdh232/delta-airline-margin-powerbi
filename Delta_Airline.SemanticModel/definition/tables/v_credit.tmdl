@@ -1,0 +1,90 @@
+/// Trailing-twelve-month credit metrics per quarter end.
+table v_credit
+	lineageTag: fd1af66f-3912-5961-7119-6cabb0fd1408
+
+	column airline_id
+		dataType: string
+		lineageTag: 5da8722f-7d08-6640-e4db-99b720a2b3eb
+		summarizeBy: none
+		sourceColumn: airline_id
+
+	column period_end
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: b37185ea-862a-52f7-9ea2-00eff37f3a2c
+		summarizeBy: none
+		sourceColumn: period_end
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column label
+		dataType: string
+		lineageTag: 019f2094-890e-d450-6ca5-ea432b980d8a
+		summarizeBy: none
+		sourceColumn: label
+
+	column ltm_revenue
+		dataType: double
+		formatString: $#,0
+		lineageTag: f1977b51-4565-8e6b-16f8-ddaa7cf72daf
+		summarizeBy: none
+		sourceColumn: ltm_revenue
+
+	column ltm_ebitda
+		dataType: double
+		formatString: $#,0
+		lineageTag: ae28cb73-cb95-7b8f-7997-33c356bef7d7
+		summarizeBy: none
+		sourceColumn: ltm_ebitda
+
+	column total_debt
+		dataType: double
+		formatString: $#,0
+		lineageTag: aeca1f9d-7ee1-cd47-bd2a-0e8b9d316497
+		summarizeBy: none
+		sourceColumn: total_debt
+
+	column liquidity
+		dataType: double
+		formatString: $#,0
+		lineageTag: 20c79ac3-75fd-e703-0e8f-26824dfda583
+		summarizeBy: none
+		sourceColumn: liquidity
+
+	column ltm_operating_margin
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 6af2e06d-f31a-6d87-6108-7e646d5130d7
+		summarizeBy: none
+		sourceColumn: ltm_operating_margin
+
+	column debt_to_ebitda
+		dataType: double
+		formatString: 0.00"x"
+		lineageTag: 93a5305b-a350-00a9-910b-7f4cde572b49
+		summarizeBy: none
+		sourceColumn: debt_to_ebitda
+
+	column interest_coverage
+		dataType: double
+		formatString: 0.0"x"
+		lineageTag: 9ca8e946-ef6c-2ec4-f42f-a1579fd305be
+		summarizeBy: none
+		sourceColumn: interest_coverage
+
+	column net_debt_to_ebitda
+		dataType: double
+		formatString: 0.00"x"
+		lineageTag: 6028baa5-a213-bbda-c679-25a7b5363cfb
+		summarizeBy: none
+		sourceColumn: net_debt_to_ebitda
+
+	partition v_credit = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "v_credit.csv"), [Delimiter = ",", Columns = 11, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"airline_id", type text}, {"period_end", type date}, {"label", type text}, {"ltm_revenue", type number}, {"ltm_ebitda", type number}, {"total_debt", type number}, {"liquidity", type number}, {"ltm_operating_margin", type number}, {"debt_to_ebitda", type number}, {"interest_coverage", type number}, {"net_debt_to_ebitda", type number}}, "en-US")
+				in
+				    Typed

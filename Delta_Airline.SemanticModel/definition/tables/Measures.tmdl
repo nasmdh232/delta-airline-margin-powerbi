@@ -1,0 +1,208 @@
+/// Calculation table: all report measures live here.
+table 'Key Measures'
+	lineageTag: 491fc2fc-8b64-dbe5-efcd-f928ac85e6c6
+
+	/// Total operating revenue, fiscal year.
+	measure 'Revenue ($B)' = DIVIDE(SUM(v_annual[revenue]),1000000000)
+		formatString: $#,0.0"B"
+		lineageTag: a01dced6-4dcc-c5e7-1479-5382a999a8c6
+
+	/// Operating income, fiscal year.
+	measure 'Operating Income ($B)' = DIVIDE(SUM(v_annual[operating_income]),1000000000)
+		formatString: $#,0.0"B"
+		lineageTag: f11ed741-05fc-d7cc-f155-ec1b8bf01035
+
+	/// Net income, fiscal year.
+	measure 'Net Income ($B)' = DIVIDE(SUM(v_annual[net_income]),1000000000)
+		formatString: $#,0.0"B"
+		lineageTag: 330ed406-2235-f041-d033-e5d65375ab0b
+
+	/// Operating income plus D&A.
+	measure 'EBITDA ($B)' = DIVIDE(SUM(v_annual[ebitda]),1000000000)
+		formatString: $#,0.0"B"
+		lineageTag: a45f03c2-0d3d-4f6d-28e9-8af2b468e1a1
+
+	/// Simple FCF = operating cash flow - capex.
+	measure 'Free Cash Flow ($B)' = DIVIDE(SUM(v_annual[free_cash_flow]),1000000000)
+		formatString: $#,0.0"B"
+		lineageTag: cb5cd9b5-40c1-3199-6eac-866f7748a87e
+
+	/// Operating income / revenue.
+	measure 'Operating Margin' = DIVIDE(SUM(v_annual[operating_income]),SUM(v_annual[revenue]))
+		formatString: 0.0%
+		lineageTag: 02b1142a-b37b-9af6-bd0c-b994ef371cfc
+
+	/// Net income / revenue.
+	measure 'Net Margin' = DIVIDE(SUM(v_annual[net_income]),SUM(v_annual[revenue]))
+		formatString: 0.0%
+		lineageTag: da61bc05-2e96-91c6-e850-b2305f8b0c24
+
+	/// Fuel expense as share of revenue.
+	measure 'Fuel % Revenue' = DIVIDE(SUM(v_annual[fuel_expense]),SUM(v_annual[revenue]))
+		formatString: 0.0%
+		lineageTag: 0f6a374b-dd40-10ca-79b2-3a06efa7a547
+
+	/// Salaries and related costs as share of revenue.
+	measure 'Labor % Revenue' = DIVIDE(SUM(v_annual[labor_expense]),SUM(v_annual[revenue]))
+		formatString: 0.0%
+		lineageTag: dc9bfada-8285-19ee-d401-5bc9aecab977
+
+	/// All other operating costs incl. D&A, as share of revenue (residual).
+	measure 'Other Costs % Revenue' = IF ( ISBLANK ( [Fuel % Revenue] ) || ISBLANK ( [Operating Margin] ), BLANK (), 1 - [Operating Margin] - [Fuel % Revenue] - [Labor % Revenue] )
+		formatString: 0.0%
+		lineageTag: 15a70d43-9c96-cae3-b78e-13a09a25147e
+
+	/// Long-term debt + finance leases, year end.
+	measure 'Total Debt ($B)' = DIVIDE(SUM(v_annual[total_debt]),1000000000)
+		formatString: $#,0.0"B"
+		lineageTag: 22901b63-42c5-5948-ff8e-0e30b65b68c9
+
+	/// Cash + short-term investments, year end (excludes undrawn revolver).
+	measure 'Liquidity ($B)' = DIVIDE(SUM(v_annual[liquidity]),1000000000)
+		formatString: $#,0.0"B"
+		lineageTag: 75c6a0e8-a88f-e072-8227-0dadd0b60019
+
+	/// Total debt / fiscal-year EBITDA.
+	measure 'Debt / EBITDA' = DIVIDE(SUM(v_annual[total_debt]),SUM(v_annual[ebitda]))
+		formatString: 0.0"x"
+		lineageTag: 65ff732b-22d8-601a-8fe7-6cfbc10a526a
+
+	/// Operating income / interest expense.
+	measure 'Interest Coverage' = DIVIDE(SUM(v_annual[operating_income]),SUM(v_annual[interest_expense]))
+		formatString: 0.0"x"
+		lineageTag: 737138c1-9ec9-c7c6-d980-fe60bd2c1043
+
+	/// Discrete quarterly revenue.
+	measure 'Qtr Revenue ($B)' = DIVIDE(SUM(v_quarterly[revenue]),1000000000)
+		formatString: $#,0.0"B"
+		lineageTag: ece62222-d4b7-e947-efb0-707a2921dc0b
+
+	/// Discrete quarterly operating margin.
+	measure 'Qtr Operating Margin' = DIVIDE(SUM(v_quarterly[operating_income]),SUM(v_quarterly[revenue]))
+		formatString: 0.0%
+		lineageTag: aaa91131-e979-3991-b388-b273eada75a1
+
+	/// Discrete quarterly fuel share of revenue.
+	measure 'Qtr Fuel % Revenue' = DIVIDE(SUM(v_quarterly[fuel_expense]),SUM(v_quarterly[revenue]))
+		formatString: 0.0%
+		lineageTag: 7a1bdfdc-4dad-c414-ba9e-72a83da5147d
+
+	/// Discrete quarterly labor share of revenue.
+	measure 'Qtr Labor % Revenue' = DIVIDE(SUM(v_quarterly[labor_expense]),SUM(v_quarterly[revenue]))
+		formatString: 0.0%
+		lineageTag: 5e6baaed-484f-482f-4e1f-07e86831352a
+
+	/// Total debt / trailing-12-month EBITDA (blank until 4 quarters of data exist).
+	measure 'LTM Debt / EBITDA' = AVERAGE(v_credit[debt_to_ebitda])
+		formatString: 0.0"x"
+		lineageTag: 41d71483-05f9-2b3d-a77c-e7cfc0b31d80
+
+	/// LTM operating income / LTM interest expense.
+	measure 'LTM Interest Coverage' = AVERAGE(v_credit[interest_coverage])
+		formatString: 0.0"x"
+		lineageTag: 8a05055d-41a5-ad3e-860a-926930642b76
+
+	/// Trailing-12-month operating margin.
+	measure 'LTM Operating Margin' = AVERAGE(v_credit[ltm_operating_margin])
+		formatString: 0.0%
+		lineageTag: 165af398-f50e-2f7b-2d67-d2cd3e1f77a0
+
+	/// Cash + short-term investments at quarter end.
+	measure 'Liquidity Qtr-end ($B)' = DIVIDE(SUM(v_credit[liquidity]),1000000000)
+		formatString: $#,0.0"B"
+		lineageTag: ce9aea6f-621d-c7eb-b73f-226ae411567a
+
+	/// Total debt at quarter end.
+	measure 'Total Debt Qtr-end ($B)' = DIVIDE(SUM(v_credit[total_debt]),1000000000)
+		formatString: $#,0.0"B"
+		lineageTag: 6e230d9f-b2e7-6c93-5c5f-165e5f1f5b35
+
+	/// RPM / ASM (Delta).
+	measure 'Load Factor' = DIVIDE(SUM(operating_metrics[rpm_millions]),SUM(operating_metrics[asm_millions]))
+		formatString: 0.0%
+		lineageTag: 5ae5aa4f-5668-905d-947c-e071a9780a58
+
+	/// Adjusted total revenue per available seat mile (Delta).
+	measure 'Adj. TRASM (cents)' = AVERAGE(operating_metrics[trasm_adjusted_cents])
+		formatString: 0.00"¢"
+		lineageTag: 7a8b4591-8059-aa3f-6017-2078279b0c79
+
+	/// Unit cost excluding fuel, profit sharing and special items (Delta).
+	measure 'CASM-Ex (cents)' = AVERAGE(operating_metrics[casm_ex_cents])
+		formatString: 0.00"¢"
+		lineageTag: af240e12-39ff-a097-6b7f-38d63424ab5b
+
+	/// Adjusted TRASM minus CASM-Ex.
+	measure 'Unit Margin Gap (cents)' = AVERAGE(operating_metrics[adj_trasm_minus_casm_ex_cents])
+		formatString: 0.00"¢"
+		lineageTag: e425b89c-cfea-41a8-4a48-6864b3f16a7c
+
+	/// Available seat miles, billions (Delta).
+	measure 'ASM (billions)' = DIVIDE(SUM(operating_metrics[asm_millions]),1000)
+		formatString: #,0.0
+		lineageTag: c092591e-20d0-bf45-47a8-9d4277e24573
+
+	/// Operating margin, FY2022.
+	measure 'Op Margin FY2022' = CALCULATE([Operating Margin], dim_year[fiscal_year] = 2022)
+		formatString: 0.0%
+		lineageTag: e80b1947-5d4e-5587-374d-65c7509dc785
+
+	/// Operating margin, FY2025.
+	measure 'Op Margin FY2025' = CALCULATE([Operating Margin], dim_year[fiscal_year] = 2025)
+		formatString: 0.0%
+		lineageTag: a0d4f909-9ff9-783c-e2b1-da81ac2188da
+
+	/// Fuel share of revenue, FY2022.
+	measure 'Fuel % Rev FY2022' = CALCULATE([Fuel % Revenue], dim_year[fiscal_year] = 2022)
+		formatString: 0.0%
+		lineageTag: 569737d0-0b9b-aff6-ccf6-022257b440a5
+
+	/// Fuel share of revenue, FY2025.
+	measure 'Fuel % Rev FY2025' = CALCULATE([Fuel % Revenue], dim_year[fiscal_year] = 2025)
+		formatString: 0.0%
+		lineageTag: 083ea730-d5d3-a2ae-5728-c6e81ed39ec7
+
+	/// Adj. TRASM minus CASM-Ex, FY2022.
+	measure 'Unit Gap FY2022' = CALCULATE([Unit Margin Gap (cents)], dim_year[fiscal_year] = 2022)
+		formatString: 0.00"¢"
+		lineageTag: 02c7539b-16fb-6e43-c9e6-5b76894ad368
+
+	/// Adj. TRASM minus CASM-Ex, FY2025.
+	measure 'Unit Gap FY2025' = CALCULATE([Unit Margin Gap (cents)], dim_year[fiscal_year] = 2025)
+		formatString: 0.00"¢"
+		lineageTag: ccb38d8f-2bde-d7dd-e5b4-f409670bceed
+
+	/// Contribution to the FY2022 to FY2025 margin change, percentage points.
+	measure 'Margin Change (pts)' = SUM(margin_bridge[pts])
+		formatString: +0.0" pts";-0.0" pts"
+		lineageTag: 5d4f348b-da09-6e77-e66d-1fd1e4750738
+
+	/// FY2025 operating margin if fuel cost per unit changes by the shock %, no revenue pass-through (simple sensitivity).
+	measure 'Margin at Fuel Shock' = CALCULATE([Operating Margin], dim_year[fiscal_year] = 2025) - CALCULATE([Fuel % Revenue], dim_year[fiscal_year] = 2025) * MAX('Fuel Shock'[Fuel Shock %]) / 100
+		formatString: 0.0%
+		lineageTag: e4a83fa7-23bd-8b6d-7739-f9eb2dd73312
+
+	/// Debt / EBITDA, FY2021.
+	measure 'Debt / EBITDA FY2021' = CALCULATE([Debt / EBITDA], dim_year[fiscal_year] = 2021)
+		formatString: 0.0"x"
+		lineageTag: c789c10c-95ef-4707-9c2b-b00279a30063
+
+	/// Debt / EBITDA, FY2025.
+	measure 'Debt / EBITDA FY2025' = CALCULATE([Debt / EBITDA], dim_year[fiscal_year] = 2025)
+		formatString: 0.0"x"
+		lineageTag: 9d9708d2-9370-3633-25d3-06247cb26032
+
+	column Placeholder
+		dataType: int64
+		isHidden
+		lineageTag: 08547619-2a46-0633-a78e-8572b9ae5bea
+		summarizeBy: none
+		sourceColumn: Placeholder
+
+	partition 'Key Measures' = m
+		mode: import
+		source =
+				let
+				    Source = #table(type table [Placeholder = Int64.Type], {{1}})
+				in
+				    Source

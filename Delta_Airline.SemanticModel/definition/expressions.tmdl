@@ -1,0 +1,6 @@
+/// Absolute path (with trailing backslash) of the folder holding the CSV files. Update it if the project folder moves.
+expression DataFolder = "C:\Delta_Airline\data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 723841ed-3e2c-b1f0-0216-edc7aceb409d
+
+	annotation PBI_ResultType = Text
+

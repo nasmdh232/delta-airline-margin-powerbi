@@ -1,0 +1,21 @@
+/// Fiscal years 2021-2026.
+table dim_year
+	lineageTag: 26f1c0c9-67ee-cd43-87b8-783c0606a846
+
+	column fiscal_year
+		dataType: int64
+		formatString: 0
+		isKey
+		lineageTag: a78c2e3d-a8b6-e73c-ab2b-b2c2276dda81
+		summarizeBy: none
+		sourceColumn: fiscal_year
+
+	partition dim_year = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_year.csv"), [Delimiter = ",", Columns = 1, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"fiscal_year", Int64.Type}}, "en-US")
+				in
+				    Typed

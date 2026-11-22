@@ -1,0 +1,40 @@
+/// One row per airline (Delta is the focus; United, American, Southwest are benchmarks).
+table dim_airline
+	lineageTag: f7f0294d-8075-5b3d-2875-b76cab462d2f
+
+	column airline_id
+		dataType: string
+		isKey
+		lineageTag: 101e510c-7c9f-5f0c-730a-8fd2128ad008
+		summarizeBy: none
+		sourceColumn: airline_id
+
+	column name
+		dataType: string
+		lineageTag: 8d631a7c-0d57-1f7c-7b18-9302dcc63c4e
+		summarizeBy: none
+		sourceColumn: name
+
+	column cik
+		dataType: string
+		isHidden
+		lineageTag: 945f8ec6-4c25-0c86-85fa-fbba774388bb
+		summarizeBy: none
+		sourceColumn: cik
+
+	column is_focus
+		dataType: int64
+		isHidden
+		lineageTag: bc015e67-f00f-6e2d-2094-a3973093b591
+		summarizeBy: none
+		sourceColumn: is_focus
+
+	partition dim_airline = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_airline.csv"), [Delimiter = ",", Columns = 4, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"airline_id", type text}, {"name", type text}, {"cik", type text}, {"is_focus", Int64.Type}}, "en-US")
+				in
+				    Typed

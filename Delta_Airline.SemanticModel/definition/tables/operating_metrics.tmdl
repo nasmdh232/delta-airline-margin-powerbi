@@ -1,0 +1,75 @@
+/// Delta operating statistics from earnings-release statistical summaries (ASM, RPM, TRASM, CASM-Ex).
+table operating_metrics
+	lineageTag: e8f93823-60fc-5929-b730-586c02ceae29
+
+	column airline_id
+		dataType: string
+		lineageTag: cefe4e48-096d-b010-c22d-4ff397dd5c19
+		summarizeBy: none
+		sourceColumn: airline_id
+
+	column fiscal_year
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c7c73bf-6c56-0548-9f87-fe54afd58df8
+		summarizeBy: none
+		sourceColumn: fiscal_year
+
+	column asm_millions
+		dataType: double
+		lineageTag: 2a73d23a-1129-31ff-b80f-a9f80eaecac2
+		summarizeBy: none
+		sourceColumn: asm_millions
+
+	column rpm_millions
+		dataType: double
+		lineageTag: 57e3de40-7fe0-8116-398b-e2fe42a5cb11
+		summarizeBy: none
+		sourceColumn: rpm_millions
+
+	column load_factor_pct
+		dataType: double
+		lineageTag: dc81b391-8300-c656-85b5-4168fbaf311c
+		summarizeBy: none
+		sourceColumn: load_factor_pct
+
+	column trasm_cents
+		dataType: double
+		lineageTag: 4fbbe0e3-cc1b-2334-056c-daca362cfb45
+		summarizeBy: none
+		sourceColumn: trasm_cents
+
+	column trasm_adjusted_cents
+		dataType: double
+		lineageTag: 33bd61cf-5368-101f-e98d-690dd079aefb
+		summarizeBy: none
+		sourceColumn: trasm_adjusted_cents
+
+	column casm_ex_cents
+		dataType: double
+		lineageTag: cb814d46-b814-dcef-80de-a1db0ec82aed
+		summarizeBy: none
+		sourceColumn: casm_ex_cents
+
+	column adj_trasm_minus_casm_ex_cents
+		dataType: double
+		lineageTag: 4ba71ae1-7d94-1e64-64cd-fc1e04f69ef5
+		summarizeBy: none
+		sourceColumn: adj_trasm_minus_casm_ex_cents
+
+	column source
+		dataType: string
+		isHidden
+		lineageTag: de127ff3-f565-78be-1df7-55c838774f0d
+		summarizeBy: none
+		sourceColumn: source
+
+	partition operating_metrics = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "operating_metrics.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"airline_id", type text}, {"fiscal_year", Int64.Type}, {"asm_millions", type number}, {"rpm_millions", type number}, {"load_factor_pct", type number}, {"trasm_cents", type number}, {"trasm_adjusted_cents", type number}, {"casm_ex_cents", type number}, {"adj_trasm_minus_casm_ex_cents", type number}, {"source", type text}}, "en-US")
+				in
+				    Typed

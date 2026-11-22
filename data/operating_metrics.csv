@@ -1,0 +1,6 @@
+airline_id,fiscal_year,asm_millions,rpm_millions,load_factor_pct,trasm_cents,trasm_adjusted_cents,casm_ex_cents,adj_trasm_minus_casm_ex_cents,source
+DAL,2021,194474.0,134692.0,69.2596439626891,15.37,,12.12,,"Delta FY2021 results release, Statistical Summary (8-K Ex.99.1, accession 0001683168-22-000238)"
+DAL,2022,233226.0,195480.0,83.81569807825886,21.69,19.55,12.87,6.6800000000000015,"Delta FY2023 results release, Statistical Summary (8-K Ex.99.1, accession 0001683168-24-000244)"
+DAL,2023,272033.0,232241.0,85.3723629118526,21.34,20.1,13.17,6.9300000000000015,"Delta FY2023 results release, Statistical Summary (8-K Ex.99.1, accession 0001683168-24-000244)"
+DAL,2024,288394.0,246145.0,85.35025000520122,21.37,19.76,13.54,6.220000000000002,"Delta FY2025 results release, Statistical Summary p.11 (news.delta.com, Jan 13 2026)"
+DAL,2025,298045.0,249578.0,83.7383616567968,21.26,19.56,13.86,5.699999999999999,"Delta FY2025 results release, Statistical Summary p.11 (news.delta.com, Jan 13 2026)"

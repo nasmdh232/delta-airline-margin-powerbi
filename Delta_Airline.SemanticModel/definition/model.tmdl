@@ -1,0 +1,27 @@
+/// Delta Air Lines deep dive: SEC XBRL financials FY2021-Q3 2026 for Delta, United, American and Southwest, plus Delta operating statistics.
+model Delta_Airline
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["dim_airline", "dim_period", "dim_year", "v_annual", "v_quarterly", "v_credit", "margin_bridge", "operating_metrics", "Fuel Shock", "Key Measures", "DataFolder"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table dim_airline
+ref table dim_period
+ref table dim_year
+ref table v_annual
+ref table v_quarterly
+ref table v_credit
+ref table margin_bridge
+ref table operating_metrics
+ref table 'Fuel Shock'
+ref table 'Key Measures'
+
+ref cultureInfo en-US
+

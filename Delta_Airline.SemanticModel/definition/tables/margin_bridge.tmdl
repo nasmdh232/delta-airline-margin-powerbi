@@ -1,0 +1,34 @@
+/// Delta operating-margin bridge FY2022 to FY2025, in percentage points (fuel, labor, other costs).
+table margin_bridge
+	lineageTag: 51d35281-8e1e-9408-9610-01ad8484fa76
+
+	column driver
+		dataType: string
+		lineageTag: 998c00e3-2df5-998c-10de-5d7d8b6e3be5
+		summarizeBy: none
+		sortByColumn: order
+		sourceColumn: driver
+
+	column order
+		dataType: int64
+		isHidden
+		lineageTag: 77b56a32-1909-0b71-cd8b-47f9523cfac4
+		summarizeBy: none
+		sourceColumn: order
+
+	column pts
+		dataType: double
+		formatString: +0.0" pts";-0.0" pts"
+		lineageTag: b17772d7-c2fd-b107-f85a-09b81b9516db
+		summarizeBy: none
+		sourceColumn: pts
+
+	partition margin_bridge = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "margin_bridge.csv"), [Delimiter = ",", Columns = 3, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"driver", type text}, {"order", Int64.Type}, {"pts", type number}}, "en-US")
+				in
+				    Typed

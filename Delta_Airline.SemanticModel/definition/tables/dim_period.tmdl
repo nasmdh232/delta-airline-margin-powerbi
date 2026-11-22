@@ -1,0 +1,51 @@
+/// One row per fiscal quarter, Q1 2021 to Q3 2026.
+table dim_period
+	lineageTag: 04b7b43e-a997-a422-b3ac-9d249d6186f2
+
+	column period_end
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		isKey
+		lineageTag: 0ef1b891-5492-dd43-3781-a10aca43cc0f
+		summarizeBy: none
+		sourceColumn: period_end
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fiscal_year
+		dataType: int64
+		formatString: 0
+		lineageTag: e73727d6-9aa8-2e9a-8863-1e417ff7632a
+		summarizeBy: none
+		sourceColumn: fiscal_year
+
+	column fiscal_quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 5493e073-a8d8-2d83-812c-cf17dc16e184
+		summarizeBy: none
+		sourceColumn: fiscal_quarter
+
+	column label
+		dataType: string
+		lineageTag: 25873443-9e25-a788-3efc-f59cdf74d22e
+		summarizeBy: none
+		sortByColumn: period_end
+		sourceColumn: label
+
+	column qlabel
+		dataType: string
+		lineageTag: 43a4b730-0117-f700-15d6-c0e7f239f702
+		summarizeBy: none
+		sortByColumn: fiscal_quarter
+		sourceColumn: qlabel
+
+	partition dim_period = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_period.csv"), [Delimiter = ",", Columns = 5, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"period_end", type date}, {"fiscal_year", Int64.Type}, {"fiscal_quarter", Int64.Type}, {"label", type text}, {"qlabel", type text}}, "en-US")
+				in
+				    Typed
