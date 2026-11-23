@@ -2,4 +2,3 @@
 **/.pbi/cache.abf
 assets/*
 !assets/.gitkeep
-__pycache__/
