@@ -1,0 +1,3 @@
+# Show the semantic model (TMDL, which holds the DAX measures) as DAX in the language bar
+*.tmdl linguist-language=DAX
+*.tmdl linguist-detectable=true
