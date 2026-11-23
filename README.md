@@ -20,6 +20,11 @@ Two-page summary: [docs/Delta_margin_analysis_summary.pdf](docs/Delta_margin_ana
 3. **Conclusion**: findings, what they mean, what to watch.
 4. **Method & limits**: data, definitions, stress-test assumptions.
 
+## Data model
+![Data model](docs/data_model.png)
+
+Full column list: [docs/data_dictionary.md](docs/data_dictionary.md)
+
 ## Data (`data/`)
 SEC EDGAR XBRL company facts (10-K/10-Q); Delta operating statistics (ASM, RPM, TRASM, CASM-Ex) from earnings-release statistical summaries. Quarterly values are derived from year-to-date filings.
 
